@@ -2,16 +2,20 @@
  * Tri d'un tableau d'entiers multi-thread.
  * Version qui utilise join().
  */
-public class Trieur extends Thread {
+public class Trieur implements Runnable {
 
   private int[] t; // tableau � trier
   private int debut, fin; // tranche de ce tableau qu'il faut trier
-
+  private boolean available = false;
+  public int compteur = 0;
+  public Trieur father;
+  
   // CONSTRUCTEURS...
-  public Trieur(int[] t, int debut, int fin) {
+  public Trieur(int[] t, int debut, int fin, Trieur father) {
 	  this.t = t;
 	  this.debut = debut;
 	  this.fin = fin;
+	  this.father = father;
   }
 
   public void run() {
@@ -22,8 +26,8 @@ public class Trieur extends Thread {
    * Trie un tableau d'entiers par ordre croissant
    * @param t tableau � trier
    */
-  public static void trier(int[] t, int debut, int fin) {
-    Trieur tableau = new Trieur(t, debut, fin);
+  public static void trier(int[] t, int debut, int fin, Trieur father) {
+    Trieur tableau = new Trieur(t, debut, fin, father);
     tableau.trier(0, t.length - 1);
   } 
   
@@ -32,7 +36,7 @@ public class Trieur extends Thread {
    * @param debut indice du début de la partie à trier
    * @param debut indice de la fin de la partie à trier
    */
-  private void trier(int debut, int fin) {
+  private synchronized void trier(int debut, int fin) {
     if (fin - debut < 2) {
       if (t[debut] > t[fin]) {
         echanger(debut, fin);
@@ -40,21 +44,43 @@ public class Trieur extends Thread {
     }
     else {
       int milieu = debut + (fin - debut) / 2;
-      Trieur trieur1 = new Trieur(t, debut , milieu);
-      Trieur trieur2 = new Trieur(t, milieu + 1 , fin);
-      trieur1.start();
-      trieur2.start();
-      try { 
-    	  trieur1.join();
-    	  trieur2.join();
-      } catch(Exception ex) { 
-          System.out.println("Exception has been" + " caught" + ex); 
+      Trieur trieur1 = new Trieur(t, debut , milieu, this);
+      Trieur trieur2 = new Trieur(t, milieu + 1 , fin, this);
+      Thread monThread1 = new Thread(trieur1);
+      Thread monThread2 = new Thread(trieur2);
+      monThread1.start();
+      monThread2.start();
+      try {
+    	  while (compteur < 2 ) {
+    		  wait();
+    	  }
+      } catch (InterruptedException e) {
+    	  // TODO Auto-generated catch block
+    	  e.printStackTrace();
       }
+//      trieur1.start();
+//      trieur2.start();
+//      try { 
+//    	  trieur1.join();
+//    	  trieur2.join();
+//      } catch(Exception ex) { 
+//          System.out.println("Exception has been" + " caught" + ex); 
+//      }
       triFusion(debut, fin);
+    }
+    if (father != null) {
+    	synchronized (father){
+    		father.compteur ++;
+            father.notifyAll();
+    	}
     }
   }
 
-  /**
+  public boolean isAvailable() {
+	return available;
+}
+
+/**
    * Echanger t[i] et t[j]
    */
   private void echanger(int i, int j) {

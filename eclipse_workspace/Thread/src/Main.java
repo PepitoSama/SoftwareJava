@@ -16,22 +16,30 @@ public class Main {
 		
 		
 		// Partie trie
+//		int[] t = {5, 6, 3, 2, 7, 4, 1};
+//	    Trieur trieur = new Trieur(t, 0 , 6);
+//	    trieur.start();
+//	    try
+//        { 
+//	    	trieur.join();
+//        } 
+//  
+//        catch(Exception ex) 
+//        { 
+//            System.out.println("Exception has been caught" + ex); 
+//        }
+		
+		// Implements Runnable
 		int[] t = {5, 6, 3, 2, 7, 4, 1};
-	    Trieur trieur = new Trieur(t, 0 , 6);
-	    trieur.start();
-	    try
-        { 
-	    	trieur.join();
-        } 
-  
-        catch(Exception ex) 
-        { 
-            System.out.println("Exception has been caught" + ex); 
-        } 
-
+	    Trieur trieur = new Trieur(t, 0 , 6, null);
+	    Thread monThread = new Thread(trieur);
+	    monThread.start();
+	    try {
+			monThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	    // A COMPLETER...
-
-
 	    for (int i = 0; i <t.length; i++) {
 	      System.out.print(t[i] + " ; ");
 	    }
