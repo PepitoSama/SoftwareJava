@@ -1,0 +1,12 @@
+package fr.polytech.guyon.saimond.download;
+
+public class Download {
+	
+	public Download(String url) {
+		this.download_file(url);
+	}
+	
+	private void download_file(String url) throws Exception {
+		
+	}
+}

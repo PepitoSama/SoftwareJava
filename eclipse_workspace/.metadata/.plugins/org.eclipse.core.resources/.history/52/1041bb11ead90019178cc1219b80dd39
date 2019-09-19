@@ -1,0 +1,42 @@
+package fr.polymontp.guyon.saimond.entreprise;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
+public class TranspositionMap {
+	
+	
+	private HashMap<String, String> map = new HashMap<>();
+	
+	public TranspositionMap() {
+		map.put("Fred", "Wilma");
+		map.put("Barney", "Betty");
+		map.put("Tristan", "Isolde");
+		map.put("Romeo", "Juliette");
+	}
+	
+	public void transposer() {
+		Set set = this.map.entrySet();
+		Iterator it = set.iterator();
+		HashMap<String, String> newMap = new HashMap<>();
+		
+
+		while(it.hasNext()) {
+			String temp = (String) it.next();
+			String[] split = temp.split("=");
+			newMap.put(split[1],split[0]);
+		}
+		this.setMap(newMap);
+	}
+	
+	// GET / SET
+
+	public HashMap<String, String> getMap() {
+		return map;
+	}
+
+	public void setMap(HashMap<String, String> map) {
+		this.map = map;
+	}
+}

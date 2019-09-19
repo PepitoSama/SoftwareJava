@@ -1,0 +1,15 @@
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) {
+		ArrayList<Compteur> compteurs = new ArrayList<Compteur>();
+		for(int i = 0; i<50; i++) {
+			compteurs.add(new Compteur("Toto " + i, 10));
+		}
+		
+		for(int i = 0; i<50; i++) {
+			Thread t = new Thread(compteurs.get(i));
+		}
+		
+	}
+}

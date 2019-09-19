@@ -1,0 +1,6 @@
+
+public class Compteur {
+	
+	// CONSTRUCTOR
+	public Compteur(String name, int n)
+}

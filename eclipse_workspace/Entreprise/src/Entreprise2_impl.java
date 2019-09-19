@@ -1,0 +1,89 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+
+import fr.polymontp.guyon.saimond.entreprise.*;
+
+public class Entreprise2_impl {
+
+	public static void main(String[] args) {
+		print("ArrayList Entreprises");
+		// Creation de l'entreprise dans une ArrayList
+		ArrayList entreprises = new ArrayList();
+		
+		
+		
+		//Entreprise 1
+		entreprises.add(new Entreprise2("NomDeLentreprise1"));
+		
+		// Ajout de 3 Employe_30, 3 Employe_50 et 3 Commerciaux
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Employe_heure("trente1", 40, 1.3, 9));
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Employe_heure("trente2", 44, 1.3, 9));
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Employe_heure("trente3", 47, 1.3, 9));
+		
+		// 50%
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Employe_heure("cinq1", 30, 1.5, 9));
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Employe_heure("cinq2", 20, 1.5, 9));
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Employe_heure("cinq3", 49, 1.5, 9));
+		
+		// Commerciaux
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Commercial("commercial1", 5000, 200000));
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Commercial("commercial2", 5000, 300000));
+		((Entreprise2) entreprises.get(0)).getEmployes().add(new Commercial("commercial3"));
+		
+		// Ajout puis suppression d'un Employe
+		((Entreprise2) entreprises.get(0)).getEmployes().add(Directeur.creerDirecteur("Jean", 9000));
+		print(entreprises.get(0).toString());
+		((Entreprise2) entreprises.get(0)).getEmployes().remove(9);
+		print(entreprises.get(0).toString());
+		
+		
+		
+		
+		// Entreprise 2
+		entreprises.add(new Entreprise2("NomDeLentreprise2"));
+		// Ajout de 3 Employe_30, 3 Employe_50 et 3 Commerciaux
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Employe_heure("trente11", 40, 1.3, 9));
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Employe_heure("trente22", 44, 1.3, 9));
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Employe_heure("trente33", 47, 1.3, 9));
+		
+		// 50%
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Employe_heure("cinq11", 30, 1.5, 9));
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Employe_heure("cinq22", 20, 1.5, 9));
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Employe_heure("cinq33", 49, 1.5, 9));
+		
+		// Commerciaux
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Commercial("commercial11", 5000, 200000));
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Commercial("commercial22", 5000, 300000));
+		((Entreprise2) entreprises.get(1)).getEmployes().add(new Commercial("commercial33"));
+		
+		// Ajout puis suppression d'un Employe
+		((Entreprise2) entreprises.get(1)).getEmployes().add(Directeur.creerDirecteur("JeanPaul", 9000));
+		print(entreprises.get(1).toString());
+		((Entreprise2) entreprises.get(1)).getEmployes().remove(9);
+		
+		print("Partie Iterateur");
+		Iterator it = ((Entreprise2) entreprises.get(0)).iterEmployes();
+		while (it.hasNext()) {
+			print(it.next().toString());
+		}
+		
+		print("Comparateur");
+		Collections.sort(((Entreprise2) entreprises.get(0)).getEmployes(), new SalaryComparator(SalaryComparator.ASCENDING_ORDER));
+		Collections.sort(((Entreprise2) entreprises.get(0)).getEmployes(), new NameComparator(SalaryComparator.ASCENDING_ORDER));
+		print("Partie Iterateur");
+		it = ((Entreprise2) entreprises.get(0)).iterEmployes();
+		while (it.hasNext()) {
+			print(it.next().toString());
+		}
+		// Partie map
+		TranspositionMap map = new TranspositionMap();
+		map.transposer();
+	}
+	
+	public static void print(String string) {
+		System.out.println(string);
+	}
+
+}
