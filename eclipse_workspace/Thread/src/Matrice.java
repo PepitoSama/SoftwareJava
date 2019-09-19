@@ -10,15 +10,32 @@ public class Matrice {
 		this.j = j;
 	}
 	
-	public static Matrice produitMatrice(Matrice mat1, Matrice mat2) {
-		Matrice res = new Matrice(null, mat1.getI(), mat2.getJ());
+	public Matrice produitMatrice(Matrice mat1, Matrice mat2) {
+		int[][] product = new int[mat1.getI()][mat2.getJ()];
 		for(int i = 0; i < mat1.getI(); i ++) {
 			for(int j = 0; j < mat2.getJ(); j ++) {
-				for(int m = 0; m < max(mat1.getJ(), mat2.getI()); m++) {
-					
+				for(int m = 0; m < mat1.getJ(); m++) {
+					product[i][j] += mat1.getMatrice()[i][m] * mat2.getMatrice()[m][j];
 				}
 			}
 		}
+		Matrice res = new Matrice(product, mat1.getI(), mat2.getJ());
+		return res;
+	}
+	
+	public String toString() {
+		String mat = "{ ";
+		String newLine = System.getProperty("line.separator");
+		for(int i = 0; i < this.getI(); i ++) {
+			for(int j = 0; j < this.getJ(); j ++) {
+				mat += this.getMatrice()[i][j] + " ";
+				if(j == this.getJ() - 1 && i != this.getI()-1) {
+					mat += newLine + "  ";
+				}
+			}
+		}
+		mat += "}";
+		return mat;
 	}
 
 	public int[][] getMatrice() {
