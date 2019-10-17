@@ -22,4 +22,6 @@
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="jdk.internal.jline.internal.ShutdownHooks.Task"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.lloseng.ocsf.server.AbstractServer"/>
+    <fullyQualifiedTypeName name="com.lloseng.ocsf.client.AbstractClient"/>
 </qualifiedTypeNameHistroy>
