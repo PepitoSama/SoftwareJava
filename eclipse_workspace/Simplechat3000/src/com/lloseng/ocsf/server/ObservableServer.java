@@ -303,7 +303,7 @@ public class ObservableServer extends Observable
   protected synchronized void handleMessageFromClient
     (Object message, ConnectionToClient client)
   {
-     setChanged();
-     notifyObservers(message);
+	  setChanged();
+	  notifyObservers(message);
   }
 }
