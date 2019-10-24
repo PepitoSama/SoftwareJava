@@ -24,4 +24,5 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.lloseng.ocsf.server.AbstractServer"/>
     <fullyQualifiedTypeName name="com.lloseng.ocsf.client.AbstractClient"/>
+    <fullyQualifiedTypeName name="client.ChatClient"/>
 </qualifiedTypeNameHistroy>

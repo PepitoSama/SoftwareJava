@@ -20,7 +20,7 @@ public class Fenetre extends JFrame implements ActionListener {
 	
 	public Fenetre() {
 		// Titre de la fenêtre
-		super("Une fenêtre");
+		super("Une fenetre");
 		
 		// Dimension de la fenêtre
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -31,9 +31,9 @@ public class Fenetre extends JFrame implements ActionListener {
 		setLocation(largeurEcran/4, hauteurEcran/4);
 		
 		// Ajout des composants
-//		this.add(label, BorderLayout.NORTH);
-//		this.add(textArea, BorderLayout.CENTER);
-//		this.add(b1, BorderLayout.SOUTH);
+		this.add(label, BorderLayout.NORTH);
+		this.add(textArea, BorderLayout.CENTER);
+		this.add(b1, BorderLayout.SOUTH);
 		this.setLayout(new GridLayout(3,2));
 		
 		for (int i=0; i<15; i++) {
@@ -43,7 +43,7 @@ public class Fenetre extends JFrame implements ActionListener {
 		}
 		
 		// Ajout du/des listener
-		//b1.addActionListener(this);
+		b1.addActionListener(this);
 	}
 
 	@Override
@@ -51,19 +51,25 @@ public class Fenetre extends JFrame implements ActionListener {
 		Object source = e.getSource();
 		if (source == b1) {
 			String textContent = textArea.getText();
-			int buttonNbr = Integer.parseInt(textContent);
-			if (buttonNbr < 15) {
-				this.remove(label);
-				this.remove(textArea);
-				this.remove(b1);
-				this.setLayout(new GridLayout(buttonNbr,1));
-				for (int i=0; i<buttonNbr; i++) {
-					this.add(buttons[i]);
-				}
-				this.setVisible(true);
+			System.out.println(textContent);
+			if (textContent.length() == 0) {
+				this.textArea.setText("Ecrire quelque chose");
 			} else {
-				this.textArea.setText("MOINS QUE CA WLH");
+				int buttonNbr = Integer.parseInt(textContent);
+				if (buttonNbr < 15) {
+					this.remove(label);
+					this.remove(textArea);
+					this.remove(b1);
+					this.setLayout(new GridLayout(buttonNbr,1));
+					for (int i=0; i<buttonNbr; i++) {
+						this.add(buttons[i]);
+					}
+					this.setVisible(true);
+				} else {
+					this.textArea.setText("Moins que 15");
+				}
 			}
+			
 		} if (source == buttons[0]) {
 			System.out.println("1");
 		} if (source == buttons[1]) {
@@ -79,21 +85,21 @@ public class Fenetre extends JFrame implements ActionListener {
 		} if (source == buttons[6]) {
 			System.out.println("7");
 		} if (source == buttons[7]) {
-			
+			System.out.println("8");
 		} if (source == buttons[8]) {
-			
+			System.out.println("9");
 		} if (source == buttons[9]) {
-			
+			System.out.println("10");
 		} if (source == buttons[10]) {
-			
+			System.out.println("11");
 		} if (source == buttons[11]) {
-			
+			System.out.println("12");
 		} if (source == buttons[12]) {
-			
+			System.out.println("13");
 		} if (source == buttons[13]) {
-			
+			System.out.println("14");
 		} if (source == buttons[14]) {
-			
+			System.out.println("15");
 		}
 	}
 }

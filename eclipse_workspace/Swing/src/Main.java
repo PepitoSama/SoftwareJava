@@ -7,7 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 		JFrame fenetre = new Fenetre();
 		fenetre.getContentPane();
-
 		fenetre.setVisible(true);
 	}
 }
